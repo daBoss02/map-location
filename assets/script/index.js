@@ -13,6 +13,8 @@ function selectAll(selector, parent = document) {
 }
 
 const mapbox = select('.mapbox');
+const longHolder = select('.longitude');
+const latHolder = select('.latitude');
 let lat;
 let long;
 
@@ -20,7 +22,8 @@ function getLocation(position) {
   const { latitude, longitude } = position.coords;
   lat = latitude;
   long = longitude;
-  console.log(`${lat}, ${long}`)
+  longHolder.innerText = long.toFixed(2);
+  latHolder.innerText = lat.toFixed(2);  
   mapboxgl.accessToken = 'pk.eyJ1IjoiZGFib3NzMDIiLCJhIjoiY2xiZ3JuZGo1MGhmajNubXUzcmYyM3RvMSJ9.3XF64pMqvw0Mso4OQv3EDA';
   const map = new mapboxgl.Map({
       container: mapbox, // container ID
@@ -28,16 +31,26 @@ function getLocation(position) {
       center: [long, lat], // starting position [lng, lat]
       zoom: 9 // starting zoom
   });
-
-  const marker = new mapboxgl.Marker()
+  const popup = new mapboxgl.Popup({ offset: 25 }).setText(
+    `(${long}, ${lat})`
+    );
+  const el = document.createElement('div');
+  el.id = 'marker'
+  const marker = new mapboxgl.Marker({
+    color: "#ff6eab",
+    'id': 'marker'
+    })
     .setLngLat([long, lat])
-    .addTo(map);
-  
-  map.addControl(new mapboxgl.FullscreenControl());
+    .addTo(map)
+    .setPopup(popup);
+
+    map.addControl(new mapboxgl.FullscreenControl({container: select('.mapbox')}));
 }
 
 function errorHandler(error) {
-  console.log(error.message);
+  longHolder.innerText = 'Blocked';
+  latHolder.innerText = 'Blocked';
+  mapbox.style.backgroundColor = 'var(--app-blue)'
 }
 
 if (navigator.geolocation) {
@@ -45,10 +58,4 @@ if (navigator.geolocation) {
   nav.getCurrentPosition(getLocation, errorHandler, { enableHighAccuracy: true });
 } else {
   console.log('Geolocation is not supported by your browser');
-}
-
-function createMap() {
-  onEvent('click', mapbox, () => {
-
-  })
 }
