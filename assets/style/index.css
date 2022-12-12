@@ -1,0 +1,114 @@
+@import "./reset.css";
+
+:root {
+  --app-dark:          #15151c                   ;
+  --app-footer-dark:   #222222                   ;
+  --app-footer-border: #f0f2f444                 ;
+  --app-light:         #f0f2f4                   ;
+  --app-footer-light:  #dae2e5                   ;
+  --app-blue:          #95c2ff                   ;
+  --app-blue-hover:    #5aa0ff                   ;
+  --app-green:         #95ffd2                   ;
+  --app-green-hover:   #6effc1                   ;
+  --app-red:           #ff95c2                   ;
+  --app-red-hover:     #ff6eab                   ;
+  --app-purple:        #9d95ff                   ;
+  --app-purple-hover:  #796eff                   ;
+  --app-orange:        #ffd295                   ;
+  --app-orange-hover:  #ffc16e                   ;
+  --app-yellow:        #f7ff95                   ;
+
+  --app-header-height: 56px                        ;
+  --app-footer-height: 112px                       ;
+  --app-border-radius: 6px                         ;
+}
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - */
+/* General                                         */
+/* - - - - - - - - - - - - - - - - - - - - - - - - */
+
+body {
+  background-color: var(--app-dark);
+}
+
+.container {
+  width: min(100% - 30px, 1280px);
+  margin-inline: auto;
+}
+
+.flex {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+/* General */
+header {
+  height: var(--app-header-height);
+  background-color: var(--app-purple-hover);
+  position: sticky;
+  top: 0;
+}
+
+/* Title */
+.title {
+  width: 60%;
+}
+h1 {
+  line-height: var(--app-header-height);
+  font-size: 28px;
+  font-weight: 400;
+}
+
+/* Nav */
+nav {
+  width: 40%;
+  justify-content: right;
+}
+li {
+  list-style: none;
+  letter-spacing: 0.4px;
+}
+nav li + li {
+  margin-left: 25px;
+}
+
+nav a {
+  line-height: var(--app-header-height);
+}
+nav a:hover {
+  text-decoration: underline var(--app-green);
+}
+
+h2, h1, a {
+  color: var(--app-light);
+}
+
+.banner {
+  height: calc(100% - var(--app-header-height));
+  width: 100%;
+  background: var(--app-dark) url(../img/map.jpg) center center / cover no-repeat fixed;
+}
+
+.darken {
+  height: 100%;
+  width: 100%;
+  background-color: #15151cb7;
+}
+
+.descr {
+  padding-top: 150px;
+  font-size: 28px;
+  color: var(--app-light);
+}
+
+.mapbox {
+  height: 300px;
+  width: 100%;
+  margin-top: 80px;
+  border-radius: 8px;
+}
+
+.mapboxgl-ctrl-bottom-left, .mapboxgl-ctrl-bottom-right {
+  display: none;
+}
+ 
